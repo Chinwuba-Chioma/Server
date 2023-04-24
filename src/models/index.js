@@ -7,6 +7,7 @@ const Review = require("./review.model");
 const SearchFilter = require("./search.filter.model");
 const Skill = require("./skill.model");
 const UserDashboard = require("./user.dashboard.model");
+const Notification = require("./notification.model");
 
 
 module.exports = {
@@ -19,4 +20,5 @@ module.exports = {
   SearchFilter,
   Skill,
   UserDashboard,
+  Notification,
 };
