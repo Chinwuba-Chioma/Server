@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const userSchema = new mongoose.Schema({
   userId: {
     type: String,
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Password is required.'],
     minlength: [6, 'Password must be at least 6 characters.'],
-    maxlength: [30, 'Password cannot be more than 30 characters.']
+    maxlength: [100, 'Password cannot be more than 100 characters.']
   },
   email: {
     type: String,

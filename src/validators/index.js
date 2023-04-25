@@ -1,5 +1,5 @@
-const signUp = require('./signup.validate');
+const register = require('./signup.validate');
 
 module.exports = {
-  signUp,
+  register,
 };

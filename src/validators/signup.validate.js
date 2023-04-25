@@ -2,33 +2,17 @@ const Joi = require('joi');
 const { StatusCodes } = require("http-status-codes");
 
 const userSchema = Joi.object({
+  username: Joi.string().required().messages({
+    'any.required': 'Username is required'
+  }),
   email: Joi.string().email().required().messages({
     'string.email': 'Please enter a valid email address',
     'any.required': 'Email is required'
   }),
-  first_name: Joi.string().trim().pattern(/^[a-zA-Z]+$/).max(50).optional().required().messages({
-    'string.trim': 'Please enter a valid first name',
-    'string.pattern.base': 'First name should only contain alphabets',
-    'string.max': 'First name should not exceed 50 characters'
+  password: Joi.string().required().min(8).pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/).messages({
+    'string.min': 'Password must be at least 8 characters long',
+    'string.pattern.base': 'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
   }),
-  last_name: Joi.string().trim().pattern(/^[a-zA-Z]+$/).max(50).optional().required().messages({
-    'string.trim': 'Please enter a valid last name',
-    'string.pattern.base': 'Last name should only contain alphabets',
-    'string.max': 'Last name should not exceed 50 characters'
-  }),
-  phone_number: Joi.string().pattern(/^\+?[0-9]+$/).optional().required().messages({
-    'string.pattern.base': 'Please enter a valid phone number'
-  }),
-  gender: Joi.string().valid('male', 'female', 'other').optional().required().messages({
-    'any.only': 'Please select a valid gender'
-  }),
-  country: Joi.string().trim().max(50).optional().required().messages({
-    'string.max': 'Country should not exceed 50 characters'
-  }),
-  state: Joi.string().trim().max(50).optional().required().messages({
-    'string.max': 'State should not exceed 50 characters'
-  }),
-  date_of_birth: Joi.date().max('now').min('1900-01-01').required()
 });
 
 function validateUser(req, res, next) {
@@ -41,6 +25,5 @@ function validateUser(req, res, next) {
   }
   next();
 }
-
 
 module.exports = validateUser;
