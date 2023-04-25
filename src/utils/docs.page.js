@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
   return res.redirect(
-    "https://documenter.getpostman.com/view/19482223/2s93Y2T2PN"
+    "https://documenter.getpostman.com/view/19482223/2s93Y6tKC4"
   );
 };
