@@ -23,6 +23,7 @@ const adminSchema = new mongoose.Schema({
   }
 });
 
+adminSchema.path('password');
 const Admin = mongoose.model('Admin', adminSchema);
 
 module.exports = Admin;
