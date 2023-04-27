@@ -1,4 +1,5 @@
 const Services = require('./data.service');
+const { passwordUtil, jwt } = require('../utils');
 const { User } = require('../models');
 
 class AuthService extends Services {
@@ -16,31 +17,24 @@ class AuthService extends Services {
 
   async login(email, password) {
     try {
-      // Fetch user data based on email and password
+      const user = await this.getUserByEmail(email);
+      const hashPassword = await user.password;
+
       if (!user) {
         throw new Error('User not found');
       }
 
-      // Perform login logic and return user data
-      // Example implementation:
-      // if (user.password === password) {
-      //   // User password is correct, perform login
-      //   return user;
-      // } else {
-      //   throw new Error('Invalid password');
-      // }
+      const isPassword = await passwordUtil.verifyPassword(hashPassword, password);
+
+      if (isPassword) {
+        const token = await jwt.signToken({user});
+        console.log('token: ' + token);
+        return token;
+      } else {
+        throw new Error('Invalid password');
+      }
     } catch (error) {
       throw new Error(`Error logging in: ${error.message}`);
-    }
-  }
-
-  async logout(userId) {
-    try {
-      // Perform logout logic and return result
-      // Example implementation:
-      // return { success: true };
-    } catch (error) {
-      throw new Error(`Error logging out: ${error.message}`);
     }
   }
 

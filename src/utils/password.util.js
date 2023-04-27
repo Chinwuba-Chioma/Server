@@ -11,17 +11,11 @@ const hashPassword = async function (password) {
 
 const verifyPassword = async function (hash, password) {
   try {
-    const hash = await argon2.verify(hash, password);
-    if (hash) {
-      return true
-    } else { 
-      return false;
-    }
+    return await argon2.verify(hash, password);
   } catch (error) {
     throw new Error(`Error verifying password: ${error.message}`);
   }
 }
-
 
 
 module.exports = {

@@ -13,7 +13,7 @@ const register = async function (req, res) {
       password,
     };
     const newUser = await auth.register(user)
-    return res.status(StatusCodes.OK).json({
+    return res.status(StatusCodes.CREATED).json({
       status: "success",
       newUser
     })
@@ -26,7 +26,44 @@ const register = async function (req, res) {
 };
 
 
+const login = async function (req, res) {
+  console.log("login function called");
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const token = await auth.login(email, password);
+
+    return res.status(StatusCodes.OK).json({
+      status: "success",
+      token
+    })
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      error: `Error signing in: ${error.message}`,
+    });
+  }
+};
+
+const tested = async function (req, res) {
+  console.log("tested function called");
+  try {
+    
+    return res.status(StatusCodes.OK).json({
+      status: "success",
+      message: "Test successfully"
+    })
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      error: `Error testing : ${error.message}`,
+    });
+  }
+};
+
 
 module.exports = {
   register,
+  login,
+  tested
 };

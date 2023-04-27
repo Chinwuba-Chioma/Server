@@ -23,9 +23,17 @@ class DataService {
     }
   }
 
+  async getUserByEmail(email) {
+    try { 
+      const data = await this.model.findOne({ email: email });
+      return data;
+    } catch (error) {
+      throw new Error(`Error getting email by email: ${error.message}`);
+     }
+   }
+
   async query(query = {}) {
     try {
-      console.log(query);
       return await this.model.find(query);
     } catch (error) {
       throw new Error(`Error getting many data: ${error.message}`);
