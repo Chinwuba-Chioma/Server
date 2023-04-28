@@ -190,22 +190,21 @@ class UserService extends Services {
     }
   }
 
-  async editProfile(userId, profileData) {
+  async updateProfile(userId, profileData) {
     try {
-      // Fetch user data
-      const user = await this.get(userId);
-      if (!user) {
+      // Update user profile information
+      const updatedUser = await this.updateOne({ _id: userId }, { $set: profileData });
+
+      if (!updatedUser) {
         throw new Error('User not found');
       }
 
-      // Update user profile information
-      Object.assign(user, profileData);
-      await user.save();
-      return user;
+      return updatedUser;
     } catch (error) {
-      throw new Error(`Error editing profile: ${error.message}`);
+      throw new Error(`Error updating profile: ${error.message}`);
     }
   }
+
 
   async viewNotifications(userId) {
     try {
