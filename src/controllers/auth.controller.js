@@ -11,6 +11,7 @@ const register = async function (req, res) {
       username: req.body.username,
       email: req.body.email,
       password,
+      role: req.body.role
     };
     const newUser = await auth.register(user)
     return res.status(StatusCodes.CREATED).json({

@@ -1,42 +1,39 @@
 const mongoose = require('mongoose');
 
 const projectSchema = new mongoose.Schema({
-  projectId: {
-    type: String,
-    required: [true, 'Project ID is required.'],
-    unique: true
-  },
-  userId: {
+  _id: mongoose.Schema.Types.ObjectId,
+  clientId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: [true, 'User ID is required.']
+    ref: 'Client',
+    required: [true, 'Client ID is required.']
   },
   title: {
     type: String,
-    required: [true, 'Title is required.'],
-    minlength: [5, 'Title must be at least 5 characters.'],
-    maxlength: [50, 'Title cannot be more than 50 characters.']
+    required: [true, 'Title is required.']
   },
-  requirements: {
+  description: {
     type: String,
-    maxlength: [200, 'Requirements cannot be more than 200 characters.']
+    required: [true, 'Description is required.']
   },
-  deadline: {
-    type: Date,
-    validate: {
-      validator: function (v) { return !v || v >= new Date(); },
-      message: 'Deadline must be in the future.'
-    }
+  category: {
+    type: String,
+    required: [true, 'Category is required.']
   },
   budget: {
     type: Number,
+    required: [true, 'Budget is required.'],
     min: [0, 'Budget cannot be negative.']
   },
-  status: {
-    type: String,
-    enum: ['open', 'closed', 'in progress'],
-    default: 'open'
+  startDate: {
+    type: Date,
+    required: [true, 'Start date is required.']
   },
+  endDate: {
+    type: Date,
+    required: [true, 'End date is required.']
+  }
+}, {
+  timestamps: true
 });
 
 const Project = mongoose.model('Project', projectSchema);

@@ -7,6 +7,14 @@ const { register } = require("../../validators");
 
 router.post("/register", register, asyncHandler(handler.auth.register));
 router.post("/login", asyncHandler(handler.auth.login));
-router.get("/test", protect, asyncHandler(handler.auth.tested));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
+// router.post("/login", asyncHandler(handler.auth.login));
 
 module.exports = router;

@@ -15,7 +15,7 @@ class DataService {
   async get(id) {
     try {
       // Fetch data from MongoDB using Mongoose
-      const data = await this.model.findOne({ _id: id });
+      const data = await this.model.findById(id);
 
       return data;
     } catch (error) {
@@ -23,9 +23,9 @@ class DataService {
     }
   }
 
-  async getUserByEmail(email) {
+  async queryOne(query = {}) {
     try {
-      const data = await this.model.findOne({ email: email });
+      const data = await this.model.findOne(query);
       return data;
     } catch (error) {
       throw new Error(`Error getting email by email: ${error.message}`);
